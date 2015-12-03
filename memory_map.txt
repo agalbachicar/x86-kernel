@@ -1,0 +1,154 @@
+Mapa de memoria del programa:
+
+Direcciones físicas - lineales (identity mapping) prácticamente todo (salvo memoria de video).  
+
+-----------------------------------------------------
+Reset:
+    LMA: 	0xFFFFFFF0
+    VMA: 	0xFFFFFFF0
+    Física:	0xFFFFFFF0
+    Lineal:	0xFFFFFFF0
+-----------------------------------------------------
+init16:
+    LMA: 	0xFFFF0000
+    VMA: 	0xFFFF0000
+    Física:	0xFFFF0000
+    Lineal:	0xFFFF0000    
+-----------------------------------------------------
+init32:
+    LMA: 	0xFFFF4000
+    VMA: 	0x000F4000
+    Física:	0x000F4000
+    Lineal:	0x000F0000    
+-----------------------------------------------------
+sys_tables:
+    LMA: 	0x00100000
+    VMA: 	0x00100000
+    Física:	0x00100000
+    Lineal:	0x00100000
+    
+    PDPT
+	    Dentro de sys_tables en la primer pagina
+-----------------------------------------------------
+pagination:
+    LMA: 	?
+    VMA: 	0x00101000
+    Física:	0x00101000
+    Lineal:	0x00101000
+    
+    TP0 (0x00000000 - 0x00200000)
+	    LMA: 	-
+	    VMA: 	0x00101000
+	    Física:	0x00101000
+	    Lineal:	0x00101000      
+    TP1 (0x00200000 - 0x00400000)
+	    LMA: 	-
+	    VMA: 	0x00102000
+	    Física:	0x00102000
+	    Lineal:	0x00102000      
+    TP2 (0x00A00000 - 0x00C00000)
+	    LMA: 	-
+	    VMA: 	0x00103000
+	    Física:	0x00103000
+	    Lineal:	0x00103000      
+    DPT0
+	    LMA: 	-
+	    VMA: 	0x00104000
+	    Física:	0x00104000
+	    Lineal:	0x00104000      
+-----------------------------------------------------
+kernel stack:
+    LMA: 	?
+    VMA: 	0x00140000
+    Física:	0x00140000
+    Lineal:	0x00140000
+    Tamaño:	0x00001000
+-----------------------------------------------------    
+main32:
+    LMA: 	?
+    VMA: 	0x00150000
+    Física:	0x00150000
+    Lineal:	0x00150000
+-----------------------------------------------------
+data:
+    LMA: 	?
+    VMA: 	0x00200000
+    Física:	0x00200000
+    Lineal:	0x00200000
+-----------------------------------------------------
+bss:
+    LMA: 	?
+    VMA: 	0x00210000
+    Física:	0x00210000
+    Lineal:	0x00210000
+-----------------------------------------------------
+library:
+    LMA: 	?
+    VMA: 	0x00220000
+    Física:	0x00220000
+    Lineal:	0x00220000
+-----------------------------------------------------
+task1_code:
+    LMA: 	?
+    VMA: 	0x00A00000
+    Física:	0x00A00000
+    Lineal:	0x00A00000
+-----------------------------------------------------
+task1_initialized_data:
+    LMA: 	?
+    VMA: 	0x00A01000
+    Física:	0x00A01000
+    Lineal:	0x00A01000
+-----------------------------------------------------
+task1_not_initialized_data:
+    LMA: 	?
+    VMA: 	0x00A02000
+    Física:	0x00A02000
+    Lineal:	0x00A02000
+-----------------------------------------------------
+task1_user_stack:
+    LMA: 	?
+    VMA: 	0x00A03000
+    Física:	0x00A03000
+    Lineal:	0x00A03000
+    Tamaño: 	0x1000
+-----------------------------------------------------
+task1_kernel_stack:
+    LMA: 	?
+    VMA: 	0x00A04000
+    Física:	0x00A04000
+    Lineal:	0x00A04000
+    Tamaño: 	0x1000
+-----------------------------------------------------
+task2_code:
+    LMA: 	?
+    VMA: 	0x00A10000
+    Física:	0x00A10000
+    Lineal:	0x00A10000
+-----------------------------------------------------
+task2_initialized_data:
+    LMA: 	?
+    VMA: 	0x00A11000
+    Física:	0x00A11000
+    Lineal:	0x00A11000
+-----------------------------------------------------
+task2_not_initialized_data:
+    LMA: 	?
+    VMA: 	0x00A12000
+    Física:	0x00A12000
+    Lineal:	0x00A12000
+-----------------------------------------------------
+task2_user_stack:
+    LMA: 	?
+    VMA: 	0x00A13000
+    Física:	0x00A13000
+    Lineal:	0x00A13000
+    Tamaño: 	0x1000
+-----------------------------------------------------
+task2_kernel_stack:
+    LMA: 	?
+    VMA: 	0x00A14000
+    Física:	0x00A14000
+    Lineal:	0x00A14000
+    Tamaño: 	0x1000
+-----------------------------------------------------
