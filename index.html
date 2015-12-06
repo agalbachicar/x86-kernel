@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>X86-kernel by agalbachicar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">X86-kernel</h1>
+      <h2 class="project-tagline">This is a simple kernel for the x86 processor with a sample app to test it.</h2>
+      <a href="https://github.com/agalbachicar/x86-kernel" class="btn">View on GitHub</a>
+      <a href="https://github.com/agalbachicar/x86-kernel/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/agalbachicar/x86-kernel/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="what-the-hell-this-thing-does" class="anchor" href="#what-the-hell-this-thing-does" aria-hidden="true"><span class="octicon octicon-link"></span></a>What the hell this thing does?</h1>
+
+<p>Well, this is just a project for the Digital Techniques signature at Electronics Engineering in UTN FRBA, Argentina. This program initializes a x86 Intel compatible processor,
+thanks to Dario Alpern for the code of the initialization, and then runs some API initialization for running a minimalistic kernel with five tasks. Some system calls are implemented,
+pagination, keyboard handler and other features. I have to thank Diego Garcia for the code of the RTC too.</p>
+
+<p>Enjoy it!</p>
+
+<p>PS: I will translate the comments in code to English for better understanding of people and I will make a wiki for keeping things right.</p>
+
+<h1>
+<a id="tools" class="anchor" href="#tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tools</h1>
+
+<p>This code has been done with:</p>
+
+<ul>
+<li>Bochs x86 Emulator 2.6.2</li>
+<li>Kate: 3.8.4</li>
+<li>NASM version 2.10.01 compiled on Jun 14 2012</li>
+<li>GNU Make 3.81</li>
+<li>Several cups of coffe</li>
+<li>Time, effort and frustration</li>
+<li>Google!</li>
+</ul>
+
+<h1>
+<a id="contenido-de-cada-archivo" class="anchor" href="#contenido-de-cada-archivo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contenido de cada archivo:</h1>
+
+<ol>
+<li>memory_map.txt: contiene la descripcion del mapa de memoria de la aplicacion</li>
+<li>init16.asm: contiene las inicializaciones de modo real</li>
+<li>init32.asm: inicializaciones de modo protegido.</li>
+<li>exception.asm: contiene el codigo que permite cargar los handlers de excepciones y el desarrollo de los mismos</li>
+<li>interruption.asm:  contiene el codigo que permite cargar los handlers de interrupciones y algunos desarrollos</li>
+<li>fifo.asm y fifo.inc: api que permite manejar una fifo.</li>
+<li>keyboard.asm y keyboard.inc: api que permite manejar el teclado.</li>
+<li>numeric.asm: api de uso matematico.</li>
+<li>pagination.asm y pagination.inc: contiene el codigo encargado de crear las tablas de paginacion en la inicializaciones</li>
+<li>sys_tables.asm: contiene la GDT, IDT y demás descritores principales de control de memoria y de programa.
+11.- system.asm: todo lo relativo al Kernel.</li>
+<li>tasks.asm: codigo y memoria de las tareas.</li>
+<li>tss.inc: contiene la descripcion de la estructura de la tss.</li>
+<li>video.asm y video.inc: api para el control de la memoria de video.</li>
+<li>main32.asm: codigo de aplicacion principal. En este ejercicio aun no se lo ha utilizado.</li>
+</ol>
+
+<h1>
+<a id="system-calls" class="anchor" href="#system-calls" aria-hidden="true"><span class="octicon octicon-link"></span></a>System Calls</h1>
+
+<ol>
+<li>Para crear una system call, escribir el código de la misma. Definir un ID de SYSCALL en system.inc y modificar el maximo.</li>
+<li>Ir a la función systemLoadSysCalls y agregar en la posición correspondiente (segun el ID colocado que debe ser consecutivo) la etiqueta del inicio.</li>
+<li>
+<p>El wrapper debe ser de la forma:</p>
+
+<p>wrapper:<br>
+  mov   eax, SYSTEM_API_SYSCALL_ID
+  int   0x80
+  ret</p>
+</li>
+</ol>
+
+<h1>
+<a id="tarea-inicial" class="anchor" href="#tarea-inicial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tarea inicial</h1>
+
+<p>La tarea inicial carga algunas cosas del kernel y luego hace un hlt - jmp para reducir el consumo de la cpu en caso de tener tareas que no utilicen el 
+espacio de procesamiento. Siempre debe estar con prioridad 1</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/agalbachicar/x86-kernel">X86-kernel</a> is maintained by <a href="https://github.com/agalbachicar">agalbachicar</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
