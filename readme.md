@@ -48,17 +48,16 @@ To create a system call follow these steps:
   * Write the system call code. Define an ID in the system.inc file and modify the maximum ID define
   * Modify the code of the function systemLoadSysCalls in system.asm and add in the correct position the label of the new implementation function.
   * Write a wrapper like this:
-
-      wrapper:      
-	  mov 	eax, SYSTEM_API_SYSCALL_ID
-	  int 	0x80
-	  ret
-	  
+```asm
+wrapper:      
+	mov 	eax, SYSTEM_API_SYSCALL_ID
+	int 	0x80
+	ret
+```	  
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Tarea inicial
+# Initial task or Idle task
 
-La tarea inicial carga algunas cosas del kernel y luego hace un hlt - jmp para reducir el consumo de la cpu en caso de tener tareas que no utilicen el 
-espacio de procesamiento. Siempre debe estar con prioridad 1
+The idle task loads some kernel configurations and it just does a `hlt` and  `jmp $-1` to reduce the CPU power consumption when no other task has to use the processing time slice. It must be set with priority 1.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
