@@ -23,49 +23,37 @@ This code has been done with:
 
 # Contenido de cada archivo:
 
-1.- memory_map.txt: contiene la descripcion del mapa de memoria de la aplicacion
-
-2.- init16.asm: contiene las inicializaciones de modo real
-
-3.- init32.asm: inicializaciones de modo protegido.
-
-4.- exception.asm: contiene el codigo que permite cargar los handlers de excepciones y el desarrollo de los mismos
-
-5.- interruption.asm:  contiene el codigo que permite cargar los handlers de interrupciones y algunos desarrollos
-
-6.- fifo.asm y fifo.inc: api que permite manejar una fifo.
-
-7.- keyboard.asm y keyboard.inc: api que permite manejar el teclado.
-
-8.- numeric.asm: api de uso matematico.
-
-9.- pagination.asm y pagination.inc: contiene el codigo encargado de crear las tablas de paginacion en la inicializaciones
-
-10.- sys_tables.asm: contiene la GDT, IDT y demás descritores principales de control de memoria y de programa.
-
-11.- system.asm: todo lo relativo al Kernel.
-
-12.- tasks.asm: codigo y memoria de las tareas.
-
-13.- tss.inc: contiene la descripcion de la estructura de la tss.
-
-14.- video.asm y video.inc: api para el control de la memoria de video.
-
-15.- main32.asm: codigo de aplicacion principal. En este ejercicio aun no se lo ha utilizado.
+  - memory_map.txt: it has a description of the application memory map.
+  - init16.asm: it has the real mode initialization.
+  - init32.asm: it has the protected mode initialization. 
+  - exception.asm: it has some exception handlers and some application code to work with pagination and display some error messages.
+  - interruption.asm: is has some exception handlers such as keyboard and tick.
+  - fifo.asm y fifo.inc: a FIFO API.
+  - keyboard.asm y keyboard.inc: a Keyboard API.
+  - numeric.asm: some number handler API.
+  - pagination.asm y pagination.inc: it has code to initialize the pagination structures of the involved tasks.
+  - sys_tables.asm: it has the GDT and IDT description. It also containes some other descriptors for the application and memory control.
+  - system.asm: all the Kernel.
+  - tasks.asm: the tasks code and memory.
+  - tss.inc: some defines and structure definitions.
+  - video.asm y video.inc: video memory manager.
+  - main32.asm: main app code. However it is not used right now.
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # System Calls
 
-  1.- Para crear una system call, escribir el código de la misma. Definir un ID de SYSCALL en system.inc y modificar el maximo.
-  2.- Ir a la función systemLoadSysCalls y agregar en la posición correspondiente (segun el ID colocado que debe ser consecutivo) la etiqueta del inicio.
-  3.- El wrapper debe ser de la forma:
+To create a system call follow these steps:
+  * Write the system call code. Define an ID in the system.inc file and modify the maximum ID define
+  * Modify the code of the function systemLoadSysCalls in system.asm and add in the correct position the label of the new implementation function.
+  * Write a wrapper like this:
 
       wrapper:      
 	  mov 	eax, SYSTEM_API_SYSCALL_ID
 	  int 	0x80
 	  ret
+	  
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Tarea inicial
