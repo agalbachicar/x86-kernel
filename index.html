@@ -48,45 +48,50 @@ pagination, keyboard handler and other features. I have to thank Diego Garcia fo
 <h1>
 <a id="contenido-de-cada-archivo" class="anchor" href="#contenido-de-cada-archivo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contenido de cada archivo:</h1>
 
-<ol>
-<li>memory_map.txt: contiene la descripcion del mapa de memoria de la aplicacion</li>
-<li>init16.asm: contiene las inicializaciones de modo real</li>
-<li>init32.asm: inicializaciones de modo protegido.</li>
-<li>exception.asm: contiene el codigo que permite cargar los handlers de excepciones y el desarrollo de los mismos</li>
-<li>interruption.asm:  contiene el codigo que permite cargar los handlers de interrupciones y algunos desarrollos</li>
-<li>fifo.asm y fifo.inc: api que permite manejar una fifo.</li>
-<li>keyboard.asm y keyboard.inc: api que permite manejar el teclado.</li>
-<li>numeric.asm: api de uso matematico.</li>
-<li>pagination.asm y pagination.inc: contiene el codigo encargado de crear las tablas de paginacion en la inicializaciones</li>
-<li>sys_tables.asm: contiene la GDT, IDT y demás descritores principales de control de memoria y de programa.
-11.- system.asm: todo lo relativo al Kernel.</li>
-<li>tasks.asm: codigo y memoria de las tareas.</li>
-<li>tss.inc: contiene la descripcion de la estructura de la tss.</li>
-<li>video.asm y video.inc: api para el control de la memoria de video.</li>
-<li>main32.asm: codigo de aplicacion principal. En este ejercicio aun no se lo ha utilizado.</li>
-</ol>
+<ul>
+<li>memory_map.txt: it has a description of the application memory map.</li>
+<li>init16.asm: it has the real mode initialization.</li>
+<li>init32.asm: it has the protected mode initialization. </li>
+<li>exception.asm: it has some exception handlers and some application code to work with pagination and display some error messages.</li>
+<li>interruption.asm: is has some exception handlers such as keyboard and tick.</li>
+<li>fifo.asm y fifo.inc: a FIFO API.</li>
+<li>keyboard.asm y keyboard.inc: a Keyboard API.</li>
+<li>numeric.asm: some number handler API.</li>
+<li>pagination.asm y pagination.inc: it has code to initialize the pagination structures of the involved tasks.</li>
+<li>sys_tables.asm: it has the GDT and IDT description. It also containes some other descriptors for the application and memory control.</li>
+<li>system.asm: all the Kernel.</li>
+<li>tasks.asm: the tasks code and memory.</li>
+<li>tss.inc: some defines and structure definitions.</li>
+<li>video.asm y video.inc: video memory manager.</li>
+<li>main32.asm: main app code. However it is not used right now.</li>
+</ul>
+
+<hr>
 
 <h1>
 <a id="system-calls" class="anchor" href="#system-calls" aria-hidden="true"><span class="octicon octicon-link"></span></a>System Calls</h1>
 
-<ol>
-<li>Para crear una system call, escribir el código de la misma. Definir un ID de SYSCALL en system.inc y modificar el maximo.</li>
-<li>Ir a la función systemLoadSysCalls y agregar en la posición correspondiente (segun el ID colocado que debe ser consecutivo) la etiqueta del inicio.</li>
-<li>
-<p>El wrapper debe ser de la forma:</p>
+<p>To create a system call follow these steps:</p>
 
-<p>wrapper:<br>
-  mov   eax, SYSTEM_API_SYSCALL_ID
-  int   0x80
-  ret</p>
-</li>
-</ol>
+<ul>
+<li>Write the system call code. Define an ID in the system.inc file and modify the maximum ID define</li>
+<li>Modify the code of the function systemLoadSysCalls in system.asm and add in the correct position the label of the new implementation function.</li>
+<li>Write a wrapper like this:</li>
+</ul>
+
+<div class="highlight highlight-source-asm-x86"><pre><span class="pl-en">wrapper:      </span>
+    <span class="pl-k">mov</span>     <span class="pl-k">eax</span>, SYSTEM_API_SYSCALL_ID
+    <span class="pl-k">int</span>     <span class="pl-c1">0x80</span>
+    <span class="pl-k">ret</span></pre></div>
+
+<hr>
 
 <h1>
-<a id="tarea-inicial" class="anchor" href="#tarea-inicial" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tarea inicial</h1>
+<a id="initial-task-or-idle-task" class="anchor" href="#initial-task-or-idle-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Initial task or Idle task</h1>
 
-<p>La tarea inicial carga algunas cosas del kernel y luego hace un hlt - jmp para reducir el consumo de la cpu en caso de tener tareas que no utilicen el 
-espacio de procesamiento. Siempre debe estar con prioridad 1</p>
+<p>The idle task loads some kernel configurations and it just does a <code>hlt</code> and  <code>jmp $-1</code> to reduce the CPU power consumption when no other task has to use the processing time slice. It must be set with priority 1.</p>
+
+<hr>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/agalbachicar/x86-kernel">X86-kernel</a> is maintained by <a href="https://github.com/agalbachicar">agalbachicar</a>.</span>
