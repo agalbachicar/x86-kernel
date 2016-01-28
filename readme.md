@@ -21,7 +21,7 @@ This code has been done with:
   - Time, effort and frustration
   - Google!
 
-# Contenido de cada archivo:
+# File content:
 
   - memory_map.txt: it has a description of the application memory map.
   - init16.asm: it has the real mode initialization.
